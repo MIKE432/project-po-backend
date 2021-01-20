@@ -13,19 +13,26 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-from gotapp.views.grupa_gorska_view import GrupaGorskaDetail, GrupaGorskaList
+from gotapp.views.punkt_view import PunktDetail, PunktDetailNested, PunktList, PunktListNested
+from gotapp.views.grupa_gorska_view import GrupaGorskaDetail, GrupaGorskaDetailNested, GrupaGorskaList, GrupaGorskaListNested
 from rest_framework.urlpatterns import format_suffix_patterns
-from gotapp.views import region_view
+from gotapp.views.region_view import RegionList, RegionDetail
 from django.contrib import admin
 from django.urls import path, include
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('regiony/', region_view.RegionList.as_view()),
-    path('regiony/<int:pk>', region_view.RegionDetail.as_view()),
+    path('regiony/', RegionList.as_view()),
+    path('regiony/<int:pk>', RegionDetail.as_view()),
     path('grupyGorskie/', GrupaGorskaList.as_view()),
-    path('grupyGorskie/<str:pk>', GrupaGorskaDetail.as_view())
+    path('grupyGorskie/<str:pk>', GrupaGorskaDetail.as_view()),
+    path('grupyGorskieNested/', GrupaGorskaListNested.as_view()),
+    path('grupyGorskieNested/<str:pk>', GrupaGorskaDetailNested.as_view()),
+    path('punkty/', PunktList.as_view()),
+    path('punkty/<int:pk>', PunktDetail.as_view()),
+    path('punktyNested/', PunktListNested.as_view()),
+    path('punktyNested/<int:pk>', PunktDetailNested.as_view())
 ]
 
 urlpatterns = format_suffix_patterns(urlpatterns)

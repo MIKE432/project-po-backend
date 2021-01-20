@@ -14,7 +14,12 @@ class GrupaGorska(models.Model):
 
 
 class GrupaGorskaSerializer(serializers.ModelSerializer):
-    region = RegionSerializer(read_only=True)
+    class Meta:
+        model = GrupaGorska
+        fields = ['kodGrupy', 'nazwa', 'region']
+
+class GrupaGorskaSerializerNested(serializers.ModelSerializer):
+    region = RegionSerializer()
     class Meta:
         model = GrupaGorska
         fields = ['kodGrupy', 'nazwa', 'region']

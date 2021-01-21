@@ -9,7 +9,7 @@ class OdcinekWeryfikowany(models.Model):
     czyZwer = models.BooleanField(blank=True, null=True)
     nrPorz = models.IntegerField()
     odcinek = models.ForeignKey(
-        'gotapp.Odcinek', on_delete=models.CASCADE)
+        'gotapp.Odcinek', on_delete=models.CASCADE, related_name='odcinki')
     przod = models.ForeignKey('gotapp.Osoba', on_delete=models.CASCADE, blank=True, null=True)
 
     class Meta:

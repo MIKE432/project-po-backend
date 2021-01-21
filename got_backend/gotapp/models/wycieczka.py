@@ -8,6 +8,7 @@ class Wycieczka(models.Model):
     dataKonc = models.DateField()
     uczestnicy = models.ManyToManyField(
         'gotapp.Osoba', through='gotapp.Uczestnictwo')
+    trasy = models.ManyToManyField('gotapp.Trasa')
 
     class Meta:
         ordering = ['nazwa', 'dataPocz', 'dataKonc']

@@ -12,3 +12,4 @@ from .ksiazeczka import Ksiazeczka
 from .odznaka import Odznaka
 from .wycieczka import Wycieczka
 from .uczestnictwo import Uczestnictwo
+from .trasa import Trasa

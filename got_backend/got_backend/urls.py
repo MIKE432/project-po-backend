@@ -13,7 +13,11 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-from gotapp.views.uprawnienie_view import UprawnienieList
+from gotapp.views.odznaka import OdznakaDetail, OdznakaList, OdznakaListByKsiazeczka
+from gotapp.views.ksiazeczka_view import KsiazeczkaDetail, KsiazeczkaDetailByOwner, KsiazeczkaDetailByOwnerNested, KsiazeczkaDetailNested, KsiazeczkaList
+from gotapp.views.stopien_odznaki_view import StopienOdznakiList
+from gotapp.views.rodzaj_odznaki_view import RodzajOdznakiList
+from gotapp.views.uprawnienie_view import UprawnienieDetail, UprawnienieList
 from gotapp.views.legitymacja_view import LegitymacjaList
 from gotapp.views.osoba_view import OsobaDetail, OsobaDetailNested, OsobaList, OsobaListNested
 from gotapp.views.odcinek_weryfikowany_view import OdcinekWeryfikowanyDetail, OdcinekWeryfikowanyDetailNested, OdcinekWeryfikowanyList, OdcinekWeryfikowanyListNested
@@ -51,7 +55,21 @@ urlpatterns = [
     path('osobyNested/', OsobaListNested.as_view()),
     path('osobyNested/<int:pk>', OsobaDetailNested.as_view()),
     path('legitymacje/', LegitymacjaList.as_view()),
-    path('uprawnienia/', UprawnienieList.as_view())
+    path('uprawnienia/', UprawnienieList.as_view()),
+    path('uprawnienia/<int:legitymacja>/<str:grupaGorska>',
+         UprawnienieDetail.as_view()),
+    path('rodzajeOdznak/', RodzajOdznakiList.as_view()),
+    path('stopnieOdznak/', StopienOdznakiList.as_view()),
+    path('ksiazeczki/', KsiazeczkaList.as_view()),
+    path('ksiazeczki/<int:pk>', KsiazeczkaDetail.as_view()),
+    path('ksiazeczki/owner/<int:turysta>', KsiazeczkaDetailByOwner.as_view()),
+    path('ksiazeczkiNested/<int:pk>', KsiazeczkaDetailNested.as_view()),
+    path('ksiazeczkiNested/owner/<int:turysta>',
+         KsiazeczkaDetailByOwnerNested.as_view()),
+    path('odznaki/', OdznakaList.as_view()),
+    path('odznaki/<int:pk>', OdznakaDetail.as_view()),
+    path('odznaki/ksiazeczka/<int:ksiazeczka>',
+         OdznakaListByKsiazeczka.as_view()),
 ]
 
 urlpatterns = format_suffix_patterns(urlpatterns)

@@ -12,6 +12,9 @@ class GrupaGorska(models.Model):
     class Meta:
         ordering = ['kodGrupy', 'nazwa']
 
+    def __str__(self):
+        return f'{self.kodGrupy}, {self.nazwa} - {str(self.region)}'
+
 
 class GrupaGorskaSerializer(serializers.ModelSerializer):
     class Meta:

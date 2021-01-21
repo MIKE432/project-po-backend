@@ -9,11 +9,15 @@ class Legitymacja(models.Model):
     przod = models.OneToOneField('gotapp.Osoba', on_delete=models.CASCADE,
                                  related_name='legitymacja')
     uprawnienia = models.ManyToManyField(
-        'gotapp.GrupaGorska', through='Uprawnienie')
+        'gotapp.GrupaGorska', through='gotapp.Uprawnienie')
+
+    def __str__(self) -> str:
+        return f'legitymacja: {str(self.przod)}'
 
 
 class LegitymacjaSerializer(serializers.ModelSerializer):
-    uprawnienie = UprawnienieSerializer(many=True, read_only=True)
+    uprawnienia_set = UprawnienieSerializer(many=True, read_only=True)
+
     class Meta:
         model = Legitymacja
         fields = '__all__'

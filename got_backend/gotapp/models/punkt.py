@@ -13,6 +13,9 @@ class Punkt(models.Model):
     class Meta:
         ordering = ['nazwa']
 
+    def __str__(self) -> str:
+        return f'{self.nazwa} ({self.grupa.__str__()})'
+
 
 class PunktSerializer(serializers.ModelSerializer):
     class Meta:

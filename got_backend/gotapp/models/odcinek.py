@@ -20,6 +20,9 @@ class Odcinek(models.Model):
     class Meta:
         ordering = ['nazwa', 'dlugosc', 'czyAktywny']
 
+    def __str__(self) -> str:
+        return f'{self.nazwa} ({str(self.poczatek)}  ---> {str(self.koniec)})'
+
 
 class OdcinekSerializer(serializers.ModelSerializer):
     class Meta:

@@ -6,3 +6,5 @@ from .odcinek_weryfikowany import OdcinekWeryfikowany
 from .osoba import Osoba
 from .legitymacja import Legitymacja
 from .uprawnienie import Uprawnienie
+from .rodzaj_odznaki import RodzajOdznaki
+from .stopien_odznaki import StopienOdznaki

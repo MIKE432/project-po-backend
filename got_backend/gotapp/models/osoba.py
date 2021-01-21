@@ -1,3 +1,4 @@
+from gotapp.models.ksiazeczka import KsiazeczkaSerializer, KsiazeczkaSerializerNested
 from gotapp.models.legitymacja import LegitymacjaSerializer
 from django.db import models
 from rest_framework import serializers
@@ -27,12 +28,18 @@ class Osoba(models.Model):
     nrTel = models.CharField(max_length=12, blank=True, null=True)
     discriminator = models.CharField(max_length=15)
 
+    def __str__(self) -> str:
+        return f'{self.id}, {self.imie} {self.nazwisko} - {self.discriminator}'
+
     class Meta:
         ordering = ['discriminator', 'nazwisko', 'imie']
 
 
 class OsobaSerializer(serializers.ModelSerializer):
-    legitymacja = serializers.PrimaryKeyRelatedField(read_only=True, allow_null=True)
+    legitymacja = serializers.PrimaryKeyRelatedField(
+        read_only=True, allow_null=True)
+    ksiazeczka = serializers.PrimaryKeyRelatedField(
+        read_only=True, allow_null=True)
 
     class Meta:
         model = Osoba
@@ -41,3 +48,4 @@ class OsobaSerializer(serializers.ModelSerializer):
 
 class OsobaSerializerNested(OsobaSerializer):
     legitymacja = LegitymacjaSerializer(read_only=True)
+    ksiazeczka = KsiazeczkaSerializerNested(read_only=True)

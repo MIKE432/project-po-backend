@@ -22,7 +22,7 @@ def get_detail_view(model: models.Model, fields: Tuple[str, ...], read_only=Fals
     if read_only:
         view = generics.RetrieveAPIView
     else:
-        view = generics.RetrieveUpdateDestroyAPIView
+        view = generics.RetrieveUpdateAPIView
 
     view.queryset = model.objects.all()
     view.serializer_class = ser

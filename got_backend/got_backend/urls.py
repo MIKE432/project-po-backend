@@ -17,7 +17,7 @@ from gotapp.models.odcinek import Odcinek
 from gotapp.utils.view_factory import get_detail_view
 from gotapp.views.trasa_view import TrasaDetail, TrasaList
 from gotapp.views.uczestnictwo_view import UczestnictwoDetail, UczestnictwoList
-from gotapp.views.wycieczka_view import WycieczkaDetail, WycieczkaList
+from gotapp.views.wycieczka_view import WycieczkaDetail, WycieczkaDetailNested, WycieczkaList
 from gotapp.views.odznaka import OdznakaDetail, OdznakaList, OdznakaListByKsiazeczka
 from gotapp.views.ksiazeczka_view import KsiazeczkaDetail, KsiazeczkaDetailByOwner, KsiazeczkaDetailByOwnerNested, KsiazeczkaDetailNested, KsiazeczkaList
 from gotapp.views.stopien_odznaki_view import StopienOdznakiList
@@ -76,6 +76,7 @@ urlpatterns = [
          OdznakaListByKsiazeczka.as_view()),
     path('wycieczki/', WycieczkaList.as_view()),
     path('wycieczki/<int:pk>', WycieczkaDetail.as_view()),
+    path('wycieczki/<int:pk>/details', WycieczkaDetailNested.as_view()),
     path('uczestnictwa/', UczestnictwoList.as_view()),
     path('uczestnictwa/<int:pk>', UczestnictwoDetail.as_view()),
     path('trasy/', TrasaList.as_view()),

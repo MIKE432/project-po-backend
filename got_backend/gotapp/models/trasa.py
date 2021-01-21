@@ -7,7 +7,6 @@ class Trasa(models.Model):
     sumaPunkt = models.IntegerField()
     dataPocz = models.DateField()
     dataKonc = models.DateField()
-    wycieczki = models.ManyToManyField('gotapp.Wycieczka')
 
     def __str__(self) -> str:
         return f'{self.id}, {self.nazwa} ({str(self.dataPocz)} ---> {str(self.dataKonc)})'

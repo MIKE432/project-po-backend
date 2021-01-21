@@ -1,4 +1,4 @@
-from gotapp.models.ksiazeczka import KsiazeczkaSerializer, KsiazeczkaSerializerNested
+from gotapp.models.ksiazeczka import KsiazeczkaSerializerNested
 from gotapp.models.legitymacja import LegitymacjaSerializer
 from django.db import models
 from rest_framework import serializers

@@ -1,5 +1,7 @@
+from gotapp.models.osoba import OsobaSerializer
 from django.db import models
 from rest_framework import serializers
+from gotapp.models.trasa import TrasaSerializer
 
 
 class Wycieczka(models.Model):
@@ -8,7 +10,8 @@ class Wycieczka(models.Model):
     dataKonc = models.DateField()
     uczestnicy = models.ManyToManyField(
         'gotapp.Osoba', through='gotapp.Uczestnictwo')
-    trasy = models.ManyToManyField('gotapp.Trasa')
+    trasa = models.OneToOneField('gotapp.Trasa', on_delete=models.CASCADE,
+                                 related_name='wycieczka', null=True, blank=True)
 
     class Meta:
         ordering = ['nazwa', 'dataPocz', 'dataKonc']
@@ -18,6 +21,15 @@ class Wycieczka(models.Model):
 
 
 class WycieczkaSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Wycieczka
+        fields = '__all__'
+
+
+class WycieczkaSerializerNested(serializers.ModelSerializer):
+    trasa = TrasaSerializer(read_only=True)
+    uczestnicy = OsobaSerializer(read_only=True, many=True)
+
     class Meta:
         model = Wycieczka
         fields = '__all__'

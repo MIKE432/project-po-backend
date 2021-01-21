@@ -80,5 +80,3 @@ urlpatterns = [
     path('trasy/', TrasaList.as_view()),
     path('trasy/<int:pk>', TrasaDetail.as_view()),
 ]
-
-urlpatterns = format_suffix_patterns(urlpatterns)

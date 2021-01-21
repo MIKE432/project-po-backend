@@ -17,12 +17,8 @@ class Punkt(models.Model):
 class PunktSerializer(serializers.ModelSerializer):
     class Meta:
         model = Punkt
-        fields = ['id','nazwa', 'wysokosc', 'szerokoscGeo', 'dlugoscGeo', 'grupa']
+        fields = '__all__'
 
 
-class PunktSerializerNested(serializers.ModelSerializer):
+class PunktSerializerNested(PunktSerializer):
     grupa = GrupaGorskaSerializerNested(read_only=True)
-
-    class Meta:
-        model = Punkt
-        fields = ['id','nazwa', 'wysokosc', 'szerokoscGeo', 'dlugoscGeo', 'grupa']

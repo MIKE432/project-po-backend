@@ -28,10 +28,6 @@ class OdcinekSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
-class OdcinekSerializerNested(serializers.ModelSerializer):
+class OdcinekSerializerNested(OdcinekSerializer):
     poczatek = PunktSerializerNested(read_only=True)
     koniec = PunktSerializerNested(read_only=True)
-
-    class Meta:
-        model = Odcinek
-        fields = '__all__'

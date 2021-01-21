@@ -1,5 +1,4 @@
 from gotapp.models.punkt import PunktSerializerNested
-from gotapp.models.grupa_gorska import GrupaGorskaSerializer, GrupaGorskaSerializerNested
 from django.db import models
 from rest_framework import serializers
 

@@ -1,4 +1,4 @@
-from gotapp.models.grupa_gorska import GrupaGorskaSerializer, GrupaGorskaSerializerNested
+from gotapp.models.grupa_gorska import GrupaGorskaSerializerNested
 from django.db import models
 from rest_framework import serializers
 

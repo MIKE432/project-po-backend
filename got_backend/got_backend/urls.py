@@ -13,6 +13,8 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+from gotapp.views.osoba_view import OsobaDetail, OsobaDetailNested, OsobaList, OsobaListNested
+from gotapp.views.odcinek_weryfikowany_view import OdcinekWeryfikowanyDetail, OdcinekWeryfikowanyDetailNested, OdcinekWeryfikowanyList, OdcinekWeryfikowanyListNested
 from gotapp.views.odcinek_view import OdcinekDetail, OdcinekDetailNested, OdcinekList, OdcinekListNested
 from gotapp.views.punkt_view import PunktDetail, PunktDetailNested, PunktList, PunktListNested
 from gotapp.views.grupa_gorska_view import GrupaGorskaDetail, GrupaGorskaDetailNested, GrupaGorskaList, GrupaGorskaListNested
@@ -37,7 +39,15 @@ urlpatterns = [
     path('odcinki/', OdcinekList.as_view()),
     path('odcinki/<int:pk>', OdcinekDetail.as_view()),
     path('odcinkiNested/', OdcinekListNested.as_view()),
-    path('odcinkiNested/<int:pk>', OdcinekDetailNested.as_view())
+    path('odcinkiNested/<int:pk>', OdcinekDetailNested.as_view()),
+    path('odcinkiWer/', OdcinekWeryfikowanyList.as_view()),
+    path('odcinkiWer/<int:pk>', OdcinekWeryfikowanyDetail.as_view()),
+    path('odcinkiWerNested/', OdcinekWeryfikowanyListNested.as_view()),
+    path('odcinkiWerNested/<int:pk>', OdcinekWeryfikowanyDetailNested.as_view()),
+    path('osoby/', OsobaList.as_view()),
+    path('osoby/<int:pk>', OsobaDetail.as_view()),
+    path('osobyNested/', OsobaListNested.as_view()),
+    path('osobyNested/<int:pk>', OsobaDetailNested.as_view()),
 ]
 
 urlpatterns = format_suffix_patterns(urlpatterns)

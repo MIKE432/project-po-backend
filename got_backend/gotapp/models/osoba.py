@@ -1,3 +1,4 @@
+from gotapp.models.legitymacja import LegitymacjaSerializer
 from django.db import models
 from rest_framework import serializers
 
@@ -5,7 +6,7 @@ from rest_framework import serializers
 def plecValidator(value: str):
     if not value in ('K', 'M'):
         raise serializers.ValidationError(
-            'plec field must be either "K" or female or "M" for male')
+            'plec field must be either "K" for female or "M" for male')
 
 
 class Osoba(models.Model):
@@ -31,10 +32,12 @@ class Osoba(models.Model):
 
 
 class OsobaSerializer(serializers.ModelSerializer):
+    legitymacja = serializers.PrimaryKeyRelatedField(read_only=True, allow_null=True)
+
     class Meta:
         model = Osoba
         fields = '__all__'
 
 
 class OsobaSerializerNested(OsobaSerializer):
-    pass
+    legitymacja = LegitymacjaSerializer(read_only=True)

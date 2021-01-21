@@ -4,3 +4,5 @@ from .punkt import Punkt
 from .odcinek import Odcinek
 from .odcinek_weryfikowany import OdcinekWeryfikowany
 from .osoba import Osoba
+from .legitymacja import Legitymacja
+from .uprawnienie import Uprawnienie

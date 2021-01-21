@@ -27,6 +27,8 @@ class Osoba(models.Model):
     kodPoczt = models.CharField(max_length=64, blank=True, null=True)
     nrTel = models.CharField(max_length=12, blank=True, null=True)
     discriminator = models.CharField(max_length=15)
+    wycieczki = models.ManyToManyField(
+        'gotapp.Wycieczka', through='gotapp.Uczestnictwo')
 
     def __str__(self) -> str:
         return f'{self.id}, {self.imie} {self.nazwisko} - {self.discriminator}'

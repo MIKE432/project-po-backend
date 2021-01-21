@@ -8,3 +8,7 @@ from .legitymacja import Legitymacja
 from .uprawnienie import Uprawnienie
 from .rodzaj_odznaki import RodzajOdznaki
 from .stopien_odznaki import StopienOdznaki
+from .ksiazeczka import Ksiazeczka
+from .odznaka import Odznaka
+from .wycieczka import Wycieczka
+from .uczestnictwo import Uczestnictwo

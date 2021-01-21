@@ -13,6 +13,8 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+from gotapp.views.uczestnictwo_view import UczestnictwoDetail, UczestnictwoList
+from gotapp.views.wycieczka_view import WycieczkaDetail, WycieczkaList
 from gotapp.views.odznaka import OdznakaDetail, OdznakaList, OdznakaListByKsiazeczka
 from gotapp.views.ksiazeczka_view import KsiazeczkaDetail, KsiazeczkaDetailByOwner, KsiazeczkaDetailByOwnerNested, KsiazeczkaDetailNested, KsiazeczkaList
 from gotapp.views.stopien_odznaki_view import StopienOdznakiList
@@ -70,6 +72,10 @@ urlpatterns = [
     path('odznaki/<int:pk>', OdznakaDetail.as_view()),
     path('odznaki/ksiazeczka/<int:ksiazeczka>',
          OdznakaListByKsiazeczka.as_view()),
+    path('wycieczki/', WycieczkaList.as_view()),
+    path('wycieczki/<int:pk>', WycieczkaDetail.as_view()),
+    path('uczestnictwa/', UczestnictwoList.as_view()),
+    path('uczestnictwa/<int:pk>', UczestnictwoDetail.as_view()),
 ]
 
 urlpatterns = format_suffix_patterns(urlpatterns)

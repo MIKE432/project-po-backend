@@ -1,3 +1,4 @@
+from gotapp.models.odcinek_weryfikowany import OdcinekWeryfikowanySerializerNested
 from django.db import models
 from rest_framework import serializers
 
@@ -13,6 +14,12 @@ class Trasa(models.Model):
 
 
 class TrasaSerializer(serializers.ModelSerializer):
+    odcinki = serializers.PrimaryKeyRelatedField(read_only=True, many=True)
+
     class Meta:
         model = Trasa
         fields = '__all__'
+
+
+class TrasaSerializerNested(TrasaSerializer):
+    odcinki = OdcinekWeryfikowanySerializerNested(many=True, read_only=True)

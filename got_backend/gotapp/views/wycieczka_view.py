@@ -7,6 +7,11 @@ class WycieczkaList(generics.ListCreateAPIView):
     serializer_class = WycieczkaSerializer
 
 
+class WycieczkaListNested(WycieczkaList):
+    queryset = Wycieczka.objects.all()
+    serializer_class = WycieczkaSerializerNested
+
+
 class WycieczkaDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Wycieczka.objects.all()
     serializer_class = WycieczkaSerializer

@@ -13,11 +13,12 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+
 from gotapp.models.odcinek import Odcinek
 from gotapp.utils.view_factory import get_detail_view
-from gotapp.views.trasa_view import TrasaDetail, TrasaList
+from gotapp.views.trasa_view import TrasaDetail, TrasaDetailNested, TrasaList, TrasaListNested
 from gotapp.views.uczestnictwo_view import UczestnictwoDetail, UczestnictwoList
-from gotapp.views.wycieczka_view import WycieczkaDetail, WycieczkaDetailNested, WycieczkaList
+from gotapp.views.wycieczka_view import WycieczkaDetail, WycieczkaDetailNested, WycieczkaList, WycieczkaListNested
 from gotapp.views.odznaka import OdznakaDetail, OdznakaList, OdznakaListByKsiazeczka
 from gotapp.views.ksiazeczka_view import KsiazeczkaDetail, KsiazeczkaDetailByOwner, KsiazeczkaDetailByOwnerNested, KsiazeczkaDetailNested, KsiazeczkaList
 from gotapp.views.stopien_odznaki_view import StopienOdznakiList
@@ -53,7 +54,8 @@ urlpatterns = [
     path('odcinkiWer/', OdcinekWeryfikowanyList.as_view()),
     path('odcinkiWer/<int:pk>', OdcinekWeryfikowanyDetail.as_view()),
     path('odcinkiWer/details', OdcinekWeryfikowanyListNested.as_view()),
-    path('odcinkiWer/<int:pk>/details', OdcinekWeryfikowanyDetailNested.as_view()),
+    path('odcinkiWer/<int:pk>/details',
+         OdcinekWeryfikowanyDetailNested.as_view()),
     path('osoby/', OsobaList.as_view()),
     path('osoby/<int:pk>', OsobaDetail.as_view()),
     path('osoby/details', OsobaListNested.as_view()),
@@ -66,7 +68,8 @@ urlpatterns = [
     path('stopnieOdznak/', StopienOdznakiList.as_view()),
     path('ksiazeczki/', KsiazeczkaList.as_view()),
     path('ksiazeczki/<int:pk>', KsiazeczkaDetail.as_view()),
-    path('ksiazeczki/byowner/<int:turysta>', KsiazeczkaDetailByOwner.as_view()),
+    path('ksiazeczki/byowner/<int:turysta>',
+         KsiazeczkaDetailByOwner.as_view()),
     path('ksiazeczki/<int:pk>/details', KsiazeczkaDetailNested.as_view()),
     path('ksiazeczki/byowner/<int:turysta>/details',
          KsiazeczkaDetailByOwnerNested.as_view()),
@@ -81,5 +84,9 @@ urlpatterns = [
     path('uczestnictwa/<int:pk>', UczestnictwoDetail.as_view()),
     path('trasy/', TrasaList.as_view()),
     path('trasy/<int:pk>', TrasaDetail.as_view()),
-    path('odcinki/<int:pk>/czyAktywny', get_detail_view(Odcinek, ('czyAktywny',))),
+    path('odcinki/<int:pk>/czyAktywny',
+         get_detail_view(Odcinek, ('czyAktywny',))),
+    path('trasy/details/', TrasaListNested.as_view()),
+    path('trasy/<int:pk>/details', TrasaDetailNested.as_view()),
+    path('wycieczki/details/', WycieczkaListNested.as_view()),
 ]

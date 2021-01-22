@@ -10,7 +10,10 @@ class OdcinekWeryfikowany(models.Model):
     nrPorz = models.IntegerField()
     odcinek = models.ForeignKey(
         'gotapp.Odcinek', on_delete=models.CASCADE, related_name='odcinki')
-    przod = models.ForeignKey('gotapp.Osoba', on_delete=models.CASCADE, blank=True, null=True)
+    przod = models.ForeignKey(
+        'gotapp.Osoba', on_delete=models.CASCADE, blank=True, null=True)
+    trasa = models.ForeignKey(
+        'gotapp.Trasa', on_delete=models.CASCADE, related_name='odcinki', null=True)
 
     class Meta:
         ordering = ['nrPorz']

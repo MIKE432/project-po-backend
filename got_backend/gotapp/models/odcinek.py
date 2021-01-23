@@ -1,3 +1,4 @@
+from django.db.models import fields
 from gotapp.models.punkt import PunktSerializerNested
 from django.db import models
 from rest_framework import serializers
@@ -35,3 +36,9 @@ class OdcinekSerializer(serializers.ModelSerializer):
 class OdcinekSerializerNested(OdcinekSerializer):
     poczatek = PunktSerializerNested(read_only=True)
     koniec = PunktSerializerNested(read_only=True)
+
+
+class OdcinekSerializerCzyAktywny(serializers.ModelSerializer):
+    class Meta:
+        model = Odcinek
+        fields = ['czyAktywny']

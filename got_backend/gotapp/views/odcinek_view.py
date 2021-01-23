@@ -1,6 +1,6 @@
 from gotapp.models.punkt import Punkt
 from gotapp.utils.view_factory import create_serializer
-from gotapp.models.odcinek import Odcinek, OdcinekSerializer, OdcinekSerializerNested
+from gotapp.models.odcinek import Odcinek, OdcinekSerializer, OdcinekSerializerCzyAktywny, OdcinekSerializerNested
 from rest_framework import generics, status
 from rest_framework.response import Response
 from django.http import Http404
@@ -24,13 +24,13 @@ class OdcinekList(generics.ListCreateAPIView):
 
         if not 'przewyzszenie' in req_data:
             przewyzszenie = koniec.wysokosc - poczatek.wysokosc
-            req_data |= {'przewyzszenie': przewyzszenie}
+            req_data['przewyzszenie'] = przewyzszenie
 
         if not 'dlugosc' in req_data:
             loc1 = (poczatek.szerokoscGeo, poczatek.dlugoscGeo)
             loc2 = (koniec.szerokoscGeo, koniec.dlugoscGeo)
             dlugosc = mpu.haversine_distance(loc1, loc2) * 1000
-            req_data |= {'dlugosc': dlugosc}
+            req_data['dlugosc'] = dlugosc
 
         serializer = OdcinekSerializer(data=req_data)
         if serializer.is_valid():
@@ -56,7 +56,7 @@ class OdcinekDetailNested(generics.RetrieveAPIView):
 
 class OdcinekDetailCzyAktywny(generics.RetrieveUpdateAPIView):
     queryset = Odcinek.objects.all()
-    serializer_class = create_serializer(Odcinek, ('czyAktywny',))
+    serializer_class = OdcinekSerializerCzyAktywny
 
     def get_object(self, pk):
         try:
@@ -64,13 +64,16 @@ class OdcinekDetailCzyAktywny(generics.RetrieveUpdateAPIView):
         except Odcinek.DoesNotExist:
             raise Http404
 
-    def put(self, request, pk,  format=None):
+    def get(self, request, pk, format=None):
         odcinek = self.get_object(pk)
-        tmp_ser = OdcinekSerializer(odcinek)
-        tmp_data = tmp_ser.data
-        tmp_data |= request.data
-        serializer = OdcinekSerializer(odcinek, data=tmp_data)
+        serializer = OdcinekSerializerCzyAktywny(odcinek)
+        return Response(serializer.data)
+
+    def put(self, request, pk, format=None):
+        odcinek = self.get_object(pk)
+        serializer = OdcinekSerializerCzyAktywny(odcinek, data=request.data)
         if serializer.is_valid():
             serializer.save()
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
+            result_ser = OdcinekSerializer(odcinek)
+            return Response(result_ser.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

@@ -1,4 +1,3 @@
-from gotapp.models.grupa_gorska import GrupaGorska
 from django.db import models
 from rest_framework import serializers
 
@@ -10,6 +9,9 @@ class Uprawnienie(models.Model):
         'gotapp.Legitymacja', on_delete=models.CASCADE, related_name='uprawnienia_set')
     grupaGorska = models.ForeignKey(
         'gotapp.GrupaGorska', on_delete=models.CASCADE)
+
+    class Meta:
+        unique_together = (('legitymacja', 'grupaGorska'),)
 
 
 class UprawnienieSerializer(serializers.ModelSerializer):

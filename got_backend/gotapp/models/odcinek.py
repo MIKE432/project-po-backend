@@ -1,17 +1,19 @@
 from gotapp.models.punkt import PunktSerializerNested
 from django.db import models
 from rest_framework import serializers
+import datetime
 
 
 class Odcinek(models.Model):
     nazwa = models.CharField(max_length=255)
-    przewyzszenie = models.FloatField()
-    dlugosc = models.FloatField()
-    czyAktywny = models.BooleanField()
+    przewyzszenie = models.FloatField(default=0)
+    dlugosc = models.FloatField(default=0)
+    czyAktywny = models.BooleanField(default=True)
     dataPonOtw = models.DateField(blank=True, null=True)
     punktacja = models.IntegerField(blank=True, null=True)
-    rokAkt = models.DateField(blank=True, null=True)
-    discriminator = models.CharField(max_length=10)
+    rokAkt = models.DateField(blank=True, null=True,
+                              default=datetime.date.today)
+    discriminator = models.CharField(max_length=10, default='NORM')
     poczatek = models.ForeignKey(
         'gotapp.Punkt', related_name='zaczynane', on_delete=models.CASCADE)
     koniec = models.ForeignKey(

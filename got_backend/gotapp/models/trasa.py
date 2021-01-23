@@ -19,6 +19,7 @@ class TrasaSerializer(serializers.ModelSerializer):
     class Meta:
         model = Trasa
         fields = '__all__'
+        read_only_fields = ('sumaPunkt',)
 
 
 class TrasaSerializerNested(TrasaSerializer):

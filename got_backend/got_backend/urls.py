@@ -14,8 +14,6 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 
-from gotapp.models.odcinek import Odcinek
-from gotapp.utils.view_factory import get_detail_view
 from gotapp.views.trasa_view import TrasaDetail, TrasaDetailNested, TrasaList, TrasaListNested
 from gotapp.views.uczestnictwo_view import UczestnictwoDetail, UczestnictwoList
 from gotapp.views.wycieczka_view import WycieczkaDetail, WycieczkaDetailNested, WycieczkaList, WycieczkaListNested
@@ -27,7 +25,7 @@ from gotapp.views.uprawnienie_view import UprawnienieDetail, UprawnienieList
 from gotapp.views.legitymacja_view import LegitymacjaList
 from gotapp.views.osoba_view import OsobaDetail, OsobaDetailNested, OsobaList, OsobaListNested
 from gotapp.views.odcinek_weryfikowany_view import OdcinekWeryfikowanyDetail, OdcinekWeryfikowanyDetailNested, OdcinekWeryfikowanyList, OdcinekWeryfikowanyListNested
-from gotapp.views.odcinek_view import OdcinekDetail, OdcinekDetailNested, OdcinekList, OdcinekListNested
+from gotapp.views.odcinek_view import OdcinekDetail, OdcinekDetailCzyAktywny, OdcinekDetailNested, OdcinekList, OdcinekListNested
 from gotapp.views.punkt_view import PunktDetail, PunktDetailNested, PunktList, PunktListNested
 from gotapp.views.grupa_gorska_view import GrupaGorskaDetail, GrupaGorskaDetailNested, GrupaGorskaList, GrupaGorskaListNested
 from gotapp.views.region_view import RegionList, RegionDetail
@@ -78,15 +76,14 @@ urlpatterns = [
     path('odznaki/byksiazeczka/<int:ksiazeczka>',
          OdznakaListByKsiazeczka.as_view()),
     path('wycieczki/', WycieczkaList.as_view()),
+    path('wycieczki/details/', WycieczkaListNested.as_view()),
     path('wycieczki/<int:pk>', WycieczkaDetail.as_view()),
     path('wycieczki/<int:pk>/details', WycieczkaDetailNested.as_view()),
     path('uczestnictwa/', UczestnictwoList.as_view()),
     path('uczestnictwa/<int:pk>', UczestnictwoDetail.as_view()),
     path('trasy/', TrasaList.as_view()),
     path('trasy/<int:pk>', TrasaDetail.as_view()),
-    path('odcinki/<int:pk>/czyAktywny',
-         get_detail_view(Odcinek, ('czyAktywny',))),
     path('trasy/details/', TrasaListNested.as_view()),
     path('trasy/<int:pk>/details', TrasaDetailNested.as_view()),
-    path('wycieczki/details/', WycieczkaListNested.as_view()),
+    path('odcinki/<int:pk>/czyAktywny', OdcinekDetailCzyAktywny.as_view()),
 ]

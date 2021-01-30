@@ -5,7 +5,7 @@ from rest_framework import serializers
 
 class Trasa(models.Model):
     nazwa = models.CharField(max_length=40)
-    sumaPunkt = models.IntegerField()
+    sumaPunkt = models.IntegerField(default=0)
     dataPocz = models.DateField()
     dataKonc = models.DateField()
 
@@ -19,7 +19,6 @@ class TrasaSerializer(serializers.ModelSerializer):
     class Meta:
         model = Trasa
         fields = '__all__'
-        read_only_fields = ('sumaPunkt',)
 
 
 class TrasaSerializerNested(TrasaSerializer):

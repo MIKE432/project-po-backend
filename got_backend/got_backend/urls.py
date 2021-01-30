@@ -14,6 +14,8 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 
+from gotapp.services.manage_badges_data import ManageBadgesData
+from gotapp.services.user_profile_data import UserProfileView
 from gotapp.views.trasa_view import TrasaDetail, TrasaDetailNested, TrasaList, TrasaListNested
 from gotapp.views.uczestnictwo_view import UczestnictwoDetail, UczestnictwoList
 from gotapp.views.wycieczka_view import WycieczkaDetail, WycieczkaDetailNested, WycieczkaList, WycieczkaListNested
@@ -86,4 +88,6 @@ urlpatterns = [
     path('trasy/details/', TrasaListNested.as_view()),
     path('trasy/<int:pk>/details/', TrasaDetailNested.as_view()),
     path('odcinki/<int:pk>/czyAktywny/', OdcinekDetailCzyAktywny.as_view()),
+    path('profile/<int:pk>/', UserProfileView.as_view()),
+    path('odznaki/manage/<int:pk>/', ManageBadgesData.as_view()),
 ]

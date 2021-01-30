@@ -1,4 +1,4 @@
-from gotapp.models.odznaka import Odznaka, OdznakaSerializer
+from gotapp.models.odznaka import Odznaka, OdznakaSerializer, OdznakaSerializerNested
 from rest_framework import generics
 
 
@@ -7,10 +7,13 @@ class OdznakaList(generics.ListCreateAPIView):
     serializer_class = OdznakaSerializer
 
 
+class OdznakaListNested(OdznakaList):
+    serializer_class = OdznakaSerializerNested
+
 class OdznakaDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Odznaka.objects.all()
     serializer_class = OdznakaSerializer
 
 
-class OdznakaListByKsiazeczka(OdznakaList):
+class OdznakaListByKsiazeczka(OdznakaListNested):
     lookup_field = 'ksiazeczka'

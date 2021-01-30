@@ -14,7 +14,6 @@ class Ksiazeczka(models.Model):
 
 class KsiazeczkaSerializer(serializers.ModelSerializer):
     odznaki = serializers.PrimaryKeyRelatedField(read_only=True, many=True)
-
     class Meta:
         model = Ksiazeczka
         fields = '__all__'

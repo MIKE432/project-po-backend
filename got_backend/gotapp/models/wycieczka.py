@@ -1,4 +1,4 @@
-from gotapp.models.osoba import OsobaSerializer
+import gotapp.models.osoba as osoba
 from django.db import models
 from rest_framework import serializers
 from gotapp.models.trasa import TrasaSerializer, TrasaSerializerNested
@@ -28,7 +28,7 @@ class WycieczkaSerializer(serializers.ModelSerializer):
 
 class WycieczkaSerializerNested(serializers.ModelSerializer):
     trasa = TrasaSerializerNested(read_only=True)
-    uczestnicy = OsobaSerializer(read_only=True, many=True)
+    uczestnicy = osoba.OsobaSerializer(read_only=True, many=True)
 
     class Meta:
         model = Wycieczka

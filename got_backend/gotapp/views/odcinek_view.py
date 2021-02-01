@@ -36,6 +36,7 @@ class OdcinekList(generics.ListCreateAPIView):
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
+
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
@@ -74,6 +75,6 @@ class OdcinekDetailCzyAktywny(generics.RetrieveUpdateAPIView):
         serializer = OdcinekSerializerCzyAktywny(odcinek, data=request.data)
         if serializer.is_valid():
             serializer.save()
-            result_ser = OdcinekSerializer(odcinek)
+            result_ser = OdcinekSerializerNested(odcinek)
             return Response(result_ser.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

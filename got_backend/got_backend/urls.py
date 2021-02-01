@@ -85,5 +85,5 @@ urlpatterns = [
     path('trasy/<int:pk>', TrasaDetail.as_view()),
     path('trasy/details/', TrasaListNested.as_view()),
     path('trasy/<int:pk>/details', TrasaDetailNested.as_view()),
-    path('odcinki/<int:pk>/czyAktywny', OdcinekDetailCzyAktywny.as_view()),
+    path('odcinki/<int:pk>/czyAktywny', OdcinekDetailCzyAktywny.as_view())
 ]
